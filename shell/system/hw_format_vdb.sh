@@ -17,9 +17,9 @@ if [ "$OPTION" == "Y" ];then
     parted /dev/vdb --script -- mklabel msdos
     parted /dev/vdb --script -- mkpart primary 0 -1
     mkfs.ext4 /dev/vdb1
+    mkdir /data
     mount /dev/vdb1 /data
-    mkdir -p /data/logs/{php,nginx}
-    mkdir /data/www
+    mkdir -p /data/www /data/logs/{php,nginx}
     chown www.www -R /data/{logs,www}
     echo '/dev/vdb1  /data ext4    defaults    0  0' >> /etc/fstab
     sed -i '3,$s/^/#/' $0
